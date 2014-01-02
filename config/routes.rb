@@ -7,7 +7,7 @@ Platanus::Application.routes.draw do
 
   get 'welcome/index'
   get 'tictactoe/new(.:format)'
-  get 'tictactoe/move/:number(.:format)' => 'tictactoe#move'
+  get 'tictactoe/move'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
