@@ -1,28 +1,49 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Juega Tic Tac Toe contra el servidor.
 
-Things you may want to cover:
+Esta aplicación cuenta con 3 partes.
 
-* Ruby version
+* La lógica del juego: Se encarga de seguir las reglas de un juego de tictactoe. Hace los movimientos, verifica quien gana, etc.
 
-* System dependencies
+* La API la cual es una interfaz entre la lógica del juego y el cliente Javascript.
 
-* Configuration
+* El cliente javascript se encarga de la interfaz de usuario asi como de consumir la API del juego.
 
-* Database creation
+== Funcionamiento de manera general
 
-* Database initialization
+* Para poder empezar a jugar es necesario hacer clic en el botón de 'New Game'
 
-* How to run the test suite
+* Se realiza un lanzamiento de moneda donde se decide quien tendrá el primer turno
 
-* Services (job queues, cache servers, search engines, etc.)
+* Después de cada movimiento se verifica si hay un ganador.
 
-* Deployment instructions
+* Si no hay ganadores, se verifica que el juego pueda continuar.
 
-* ...
+* El juego termina cuando hay un ganador o ya no quedan espacios disponibles en el tablero.
 
+* Se puede reiniciar un juego nuevo en cualquier momento, haciendo clic en el botón de 'New Game'.
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== API
+
+* Para iniciar un juego el cliente hace una llamada a la ruta '/game/new'
+
+* Esto regresa un objeto JSON que contiene:
+
+* board: Un array de la forma [0, 0, 0, 0, 0, 0, 0] con el cual el cliente puede actualizar el estado del tablero.
+
+* message: Un mensaje el servidor para informar al usuaior sobre que está sucediendo.
+
+* game_ended: Una bandera que le indica al cliente si el juego ha terminado.
+
+* server: Identificador interno sobre el servidor (2)
+
+* user: Identificador interno sobre el juegador
+
+* winner: Identificador interno del ganador. Sólo se muestra cuando hay un ganador.
+
+* winner_pattern: Un array que muestra las posiciones de la línea ganadora. Sólo disponible cuando hay un ganador.
+
+== TODO
+
+* Agregar IA al servidor para que las partidas sean mas emocionantes.
