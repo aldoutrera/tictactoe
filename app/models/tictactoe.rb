@@ -27,13 +27,21 @@ class Tictactoe
   end
 
   def player_turn(cell)
-    make_move(cell, @user)
-    server_turn()
+    if make_move(cell, @user)
+      server_turn()
+    end
     find_winner()
   end
 
   def make_move(cell, player)
-    @board[cell] = player
+    if @board[cell] == 0
+      @board[cell] = player
+      @message = "Excelente. Sigue asi."
+      return true
+    else
+      @message = "Movimiento Invalido. Intentalo de nuevo."
+      return false
+    end
   end
 
   def server_random_move
