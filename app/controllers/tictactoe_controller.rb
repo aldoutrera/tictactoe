@@ -5,7 +5,7 @@ class TictactoeController < ApplicationController
     @tictactoe.start
     update_session
     respond_to do |format|
-      format.html { render json: @tictactoe }
+      format.json { render json: @tictactoe }
     end
   end
 
@@ -15,7 +15,7 @@ class TictactoeController < ApplicationController
     @tictactoe.player_turn(params[:number].to_i)
     update_session
     respond_to do |format|
-      format.html { render json: @tictactoe }
+      format.json { render json: @tictactoe }
     end
   end
 
