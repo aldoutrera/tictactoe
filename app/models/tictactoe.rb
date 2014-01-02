@@ -5,6 +5,7 @@ class Tictactoe
     @board  = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     @user   = 1
     @server = 2
+    @game_ended = false
   end
 
   def start
@@ -27,20 +28,28 @@ class Tictactoe
   end
 
   def player_turn(cell)
-    if make_move(cell, @user)
+    if valid_move(cell, @user)
+      @message = "Muy bien. Sigue asi."
+      make_move(cell, @user)
       server_turn()
+    else
+      @message = "Movimiento Invalido. Intentalo de nuevo."
     end
-    find_winner()
+  end
+
+  def valid_move(cell, player)
+    if @board[cell] == 0
+      @board[cell] = player
+      return true
+    else
+      return false
+    end
   end
 
   def make_move(cell, player)
-    if @board[cell] == 0
+    if @game_ended == false
       @board[cell] = player
-      @message = "Excelente. Sigue asi."
-      return true
-    else
-      @message = "Movimiento Invalido. Intentalo de nuevo."
-      return false
+      find_winner()
     end
   end
 
@@ -53,6 +62,52 @@ class Tictactoe
   end
 
   def find_winner
-    patterns = []
+    patterns = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [6, 4, 2],
+    ]
+    patterns.each_with_index {
+      |array, index|
+      symbol = 0
+      counter = 1
+      for cell in array
+        if @board[cell] == 0
+          break
+        end
+        if symbol == 0
+          symbol = @board[cell]
+        else
+          if symbol != @board[cell]
+            break
+          end
+          counter = counter + 1
+        end
+        if counter == 3
+          @game_ended = true
+          @winner_pattern = array
+          @winner = symbol
+          if symbol == @user
+            @message = "Haz demostrado tu destreza y has salido vencedor del encuentro. Felicidades."
+          else
+            @message = "Te sientes como Kasparov al perder contra una maquina, sin embargo estas listo para la revancha. Mucha suerte."
+          end
+        end
+      end
+    }
+
+    if @game_ended == false
+      unless @board.find_index(0)
+        @game_ended = true
+        @winner_pattern = []
+        @message = "El encuentro ha resultado en empate. Al siguiente juego."
+      end
+    end
+
   end
 end
