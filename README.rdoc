@@ -32,13 +32,13 @@ Esta aplicación cuenta con 3 partes.
 
 * board: Un array de la forma [0, 0, 0, 0, 0, 0, 0] con el cual el cliente puede actualizar el estado del tablero.
 
-* message: Un mensaje el servidor para informar al usuaior sobre que está sucediendo.
+* message: Un mensaje el servidor para informar al usuario sobre que está sucediendo.
 
 * game_ended: Una bandera que le indica al cliente si el juego ha terminado.
 
-* server: Identificador interno sobre el servidor (2)
+* server: Identificador interno sobre el servidor (2).
 
-* user: Identificador interno sobre el juegador
+* user: Identificador interno sobre el juegador (1).
 
 * winner: Identificador interno del ganador. Sólo se muestra cuando hay un ganador.
 
